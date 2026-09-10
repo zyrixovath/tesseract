@@ -5,12 +5,12 @@ from datetime import datetime
 import random
 
 app = Flask(__name__)
-CORS(app) # Allows your frontend to communicate with this API
+CORS(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///campuspulse.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Database Model
 class Complaint(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     complaint_id = db.Column(db.String(20), unique=True)
@@ -27,7 +27,6 @@ class Complaint(db.Model):
 with app.app_context():
     db.create_all()
 
-# Endpoint: Get all complaints
 @app.route('/api/complaints', methods=['GET'])
 def get_complaints():
     complaints = Complaint.query.order_by(Complaint.created_at.desc()).all()
@@ -44,12 +43,10 @@ def get_complaints():
         'createdAt': c.created_at.isoformat()
     } for c in complaints])
 
-# Endpoint: Submit a new complaint
 @app.route('/api/complaints', methods=['POST'])
 def create_complaint():
     data = request.json
-    year = str(datetime.now().year)[-2:]
-    new_id = f"CP-{year}-{random.randint(1000, 9999)}"
+    new_id = f"CP-{str(datetime.now().year)[-2:]}-{random.randint(1000, 9999)}"
     
     new_complaint = Complaint(
         complaint_id=new_id,
@@ -63,7 +60,7 @@ def create_complaint():
     db.session.add(new_complaint)
     db.session.commit()
     
-    return jsonify({"message": "Complaint submitted!", "id": new_id}), 201
+    return jsonify({"message": "Success", "id": new_id}), 201
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
