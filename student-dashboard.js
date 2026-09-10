@@ -130,7 +130,7 @@ function setGreeting(name) {
 // FETCH FROM BACKEND (Replaced LocalStorage)
 async function getComplaints() {
     try {
-        const response = await fetch('http://localhost:5000/api/complaints');
+        const response = await fetch('[https://tesseract-rwkf.onrender.com/api/complaints](https://tesseract-rwkf.onrender.com/api/complaints)');
         return await response.json();
     } catch (error) {
         console.error("Failed to load complaints:", error);
