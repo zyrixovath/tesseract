@@ -3,11 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from datetime import datetime
 import random
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///campuspulse.db'
+# This looks for your Supabase URL in Render's settings. 
+# If it can't find it (like on your local computer), it safely falls back to SQLite.
+db_url = os.environ.get('DATABASE_URL', 'sqlite:///campuspulse.db')
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
