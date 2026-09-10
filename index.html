@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusPulse | Login</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+</div>
+
+
+<main class="page-container">
+
+    <!-- ===============================
+         LEFT SIDE
+         =============================== -->
+
+    <section class="hero-section">
+
+        <div class="brand">
+
+            <img
+                src="logo.png"
+                class="brand-logo"
+                alt="CampusPulse Logo"
+            >
+
+            <div>
+                <h2>CampusPulse</h2>
+                <span>Campus Intelligence Platform</span>
+            </div>
+
+        </div>
+
+
+        <div class="hero-content">
+
+            <div class="live-badge">
+                <span class="pulse-dot"></span>
+                Campus intelligence online
+            </div>
+
+
+            <h1>
+
+                Your campus.
+
+                <br>
+
+                <span>
+                    One intelligent pulse.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Report campus problems, track your complaints
+                and help administrators understand recurring
+                problems across the campus.
+
+            </p>
+
+
+            <div class="feature-list">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Report Instantly
+                        </strong>
+
+                        <span>
+                            Submit campus complaints in seconds.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ◎
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Track Progress
+                        </strong>
+
+                        <span>
+                            Follow your complaint from report to resolution.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Better Campus
+                        </strong>
+
+                        <span>
+                            Help authorities identify recurring issues.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <p class="footer-text">
+            Built for a smarter VIT Bhopal.
+        </p>
+
+    </section>
+
+
+
+    <!-- ===============================
+         LOGIN SIDE
+         =============================== -->
+
+    <section class="login-section">
+
+
+        <div class="login-card">
+
+
+            <img
+                src="logo.png"
+                class="login-logo"
+                alt="CampusPulse"
+            >
+
+
+            <p class="welcome-label">
+
+                WELCOME TO CAMPUSPULSE
+
+            </p>
+
+
+            <h2>
+
+                Sign in to your campus
+
+            </h2>
+
+
+            <p class="subtitle">
+
+                Select your account type and continue using
+                your official VIT Bhopal Google account.
+
+            </p>
+
+
+
+            <!-- ===============================
+                 ROLE SELECTOR
+                 =============================== -->
+
+            <div class="role-selector">
+
+
+                <button
+                    type="button"
+                    class="role-card active"
+                    data-role="student"
+                    id="studentRole"
+                >
+
+                    <div class="role-icon">
+                        🎓
+                    </div>
+
+                    <div class="role-content">
+
+                        <strong>
+                            Student
+                        </strong>
+
+                        <span>
+                            Report & track complaints
+                        </span>
+
+                    </div>
+
+                    <div class="role-check">
+                        ✓
+                    </div>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="role-card"
+                    data-role="admin"
+                    id="adminRole"
+                >
+
+                    <div class="role-icon admin-icon">
+                        🛡
+                    </div>
+
+                    <div class="role-content">
+
+                        <strong>
+                            Administrator
+                        </strong>
+
+                        <span>
+                            Campus operations access
+                        </span>
+
+                    </div>
+
+                    <div class="role-check">
+                        ✓
+                    </div>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- SELECTED ROLE INFO -->
+
+            <div class="selected-info" id="selectedInfo">
+
+                <span class="info-icon">
+                    🎓
+                </span>
+
+                <div>
+
+                    <strong id="selectedTitle">
+                        Student Access
+                    </strong>
+
+                    <p id="selectedDescription">
+                        Submit complaints, check status and view your complaint history.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ===============================
+                 GOOGLE LOGIN
+                 =============================== -->
+
+            <button
+                id="googleLogin"
+                class="google-button"
+                type="button"
+            >
+
+                <svg
+                    width="21"
+                    height="21"
+                    viewBox="0 0 48 48"
+                >
+
+                    <path
+                        fill="#FFC107"
+                        d="M43.6 20H24v8h11.3C33.7 32.6 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34 6 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11.5 0 19-8.1 19-19.5 0-1.5-.2-3-.4-4.5z"
+                    />
+
+                    <path
+                        fill="#FF3D00"
+                        d="M6.3 14.7l6.6 4.8C14.7 15 19 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34 6 29.3 4 24 4c-7.7 0-14.3 4.3-17.7 10.7z"
+                    />
+
+                    <path
+                        fill="#4CAF50"
+                        d="M24 44c5.1 0 9.6-1.7 13-4.7l-6-5.1C29 35.7 26.6 36.5 24 36c-5.3 0-9.7-3.4-11.3-8.1l-6.5 5C9.5 39.4 16.2 44 24 44z"
+                    />
+
+                    <path
+                        fill="#1976D2"
+                        d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l6 5.1C40.5 35.6 43 30.8 43 24.5c0-1.5-.1-3-.4-4.5z"
+                    />
+
+                </svg>
+
+
+                <span id="googleButtonText">
+
+                    Continue as Student with Google
+
+                </span>
+
+            </button>
+
+
+
+            <div id="loginMessage"></div>
+
+
+
+            <!-- DOMAIN -->
+
+            <div class="university-box">
+
+                <span class="shield">
+                    🛡
+                </span>
+
+                <div>
+
+                    <strong>
+                        VIT Bhopal accounts only
+                    </strong>
+
+                    <span>
+                        Authentication restricted to @vitbhopal.ac.in
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="domain-badge">
+
+                @vitbhopal.ac.in
+
+            </div>
+
+
+            <p class="admin-note">
+
+                Administrator access is restricted to
+                authorized university accounts.
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script
+    type="module"
+    src="script.js">
+</script>
+
+
+</body>
+
+</html>

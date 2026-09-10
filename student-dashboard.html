@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusPulse | Student Portal</title>
+
+    <link
+        rel="stylesheet"
+        href="student-dashboard.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+
+<div class="background-grid"></div>
+
+
+<div class="app-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <img
+                src="logo.png"
+                alt="CampusPulse Logo"
+                class="sidebar-logo"
+            >
+
+            <div>
+
+                <h2>
+                    CampusPulse
+                </h2>
+
+                <span>
+                    Student Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <nav class="navigation">
+
+
+            <button
+                class="nav-item active"
+                data-section="overview"
+            >
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                Overview
+
+            </button>
+
+
+
+            <button
+                class="nav-item"
+                data-section="report"
+            >
+
+                <span class="nav-icon">
+                    ＋
+                </span>
+
+                Report Complaint
+
+            </button>
+
+
+
+            <button
+                class="nav-item"
+                data-section="active"
+            >
+
+                <span class="nav-icon">
+                    ◷
+                </span>
+
+                Active Complaints
+
+                <span
+                    class="nav-count"
+                    id="activeNavCount"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="nav-item"
+                data-section="history"
+            >
+
+                <span class="nav-icon">
+                    ▣
+                </span>
+
+                Complaint History
+
+            </button>
+
+
+
+            <button
+                class="nav-item"
+                data-section="profile"
+            >
+
+                <span class="nav-icon">
+                    ◉
+                </span>
+
+                Profile
+
+            </button>
+
+
+        </nav>
+
+
+
+        <div class="sidebar-bottom">
+
+
+            <button
+                class="sidebar-logout"
+                id="sidebarLogout"
+            >
+
+                ↪ Sign out
+
+            </button>
+
+
+            <div class="system-status">
+
+                <span class="online-dot"></span>
+
+                CampusPulse Online
+
+            </div>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <p class="eyebrow">
+                    STUDENT PORTAL
+                </p>
+
+                <h1 id="greeting">
+                    Welcome 👋
+                </h1>
+
+            </div>
+
+
+
+            <div class="profile-area">
+
+
+                <div
+                    class="user-card"
+                    id="userCard"
+                >
+
+                    <img
+                        src=""
+                        id="userAvatar"
+                        alt="Student"
+                    >
+
+
+                    <div class="user-information">
+
+                        <strong id="userName">
+                            Student
+                        </strong>
+
+                        <span id="userEmail">
+                            student@vitbhopal.ac.in
+                        </span>
+
+                    </div>
+
+
+                    <span class="chevron">
+                        ▾
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    class="profile-menu"
+                    id="profileMenu"
+                >
+
+
+                    <button id="openProfileMenu">
+
+                        My Profile
+
+                    </button>
+
+
+                    <button
+                        class="logout-option"
+                        id="logoutButton"
+                    >
+
+                        Sign out
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================================
+             OVERVIEW
+        ====================================================== -->
+
+        <section
+            class="page-section active-section"
+            id="overviewSection"
+        >
+
+
+            <div class="welcome-card">
+
+
+                <div class="welcome-content">
+
+
+                    <div class="online-label">
+
+                        <span></span>
+
+                        CampusPulse Student Access
+
+                    </div>
+
+
+                    <h2>
+                        Something wrong on campus?
+                    </h2>
+
+
+                    <p>
+
+                        Report campus problems directly to the
+                        administration and track the complaint
+                        until it is resolved.
+
+                    </p>
+
+
+                    <button
+                        class="primary-button"
+                        id="heroReportButton"
+                    >
+
+                        <span>
+                            ＋
+                        </span>
+
+                        Report a complaint
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div class="pulse-visual">
+
+
+                    <div class="pulse-circle circle-one"></div>
+
+                    <div class="pulse-circle circle-two"></div>
+
+
+                    <img
+                        src="logo.png"
+                        alt="CampusPulse"
+                    >
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RECENT COMPLAINTS
+            ================================================== -->
+
+            <div class="content-panel">
+
+
+                <div class="panel-header">
+
+
+                    <div>
+
+                        <p class="eyebrow">
+                            YOUR COMPLAINTS
+                        </p>
+
+                        <h3>
+                            Recent complaints
+                        </h3>
+
+                    </div>
+
+
+                    <button
+                        class="text-button"
+                        id="viewAllComplaints"
+                    >
+
+                        View all →
+
+                    </button>
+
+
+                </div>
+
+
+
+                <div
+                    class="complaint-list"
+                    id="recentComplaintList"
+                ></div>
+
+
+
+                <div
+                    class="empty-state"
+                    id="overviewEmptyState"
+                >
+
+
+                    <div class="empty-icon">
+                        ✓
+                    </div>
+
+
+                    <h3>
+                        No complaints yet
+                    </h3>
+
+
+                    <p>
+
+                        You haven't submitted any campus complaints.
+
+                    </p>
+
+
+                    <button
+                        class="small-primary-button"
+                        id="emptyReportButton"
+                    >
+
+                        Report your first complaint
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             REPORT COMPLAINT
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="reportSection"
+        >
+
+
+            <div class="section-heading">
+
+
+                <p class="eyebrow">
+                    NEW COMPLAINT
+                </p>
+
+
+                <h2>
+                    Report a campus problem
+                </h2>
+
+
+                <p>
+
+                    Select the category and location,
+                    then describe the problem clearly.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="report-layout">
+
+
+                <!-- =================================================
+                     FORM
+                ================================================== -->
+
+                <form
+                    class="complaint-form"
+                    id="complaintForm"
+                >
+
+
+                    <div class="form-row">
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="form-group">
+
+
+                            <label for="complaintCategory">
+
+                                Category
+
+                            </label>
+
+
+                            <select
+                                id="complaintCategory"
+                                required
+                            >
+
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+
+                                <option value="Internet / WiFi">
+                                    Internet / WiFi
+                                </option>
+
+
+                                <option value="Electricity">
+                                    Electricity
+                                </option>
+
+
+                                <option value="Water">
+                                    Water
+                                </option>
+
+
+                                <option value="Hostel">
+                                    Hostel
+                                </option>
+
+
+                                <option value="Mess / Food">
+                                    Mess / Food
+                                </option>
+
+
+                                <option value="Cleanliness">
+                                    Cleanliness
+                                </option>
+
+
+                                <option value="Infrastructure">
+                                    Infrastructure
+                                </option>
+
+
+                                <option value="Transport">
+                                    Transport
+                                </option>
+
+
+                                <option value="Safety">
+                                    Safety
+                                </option>
+
+
+                                <option value="Academic Facility">
+                                    Academic Facility
+                                </option>
+
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- LOCATION -->
+
+                        <div class="form-group">
+
+
+                            <label for="complaintLocation">
+
+                                Location
+
+                            </label>
+
+
+                            <select
+                                id="complaintLocation"
+                                required
+                            >
+
+
+                                <option value="">
+                                    Select location
+                                </option>
+
+
+                                <option value="Boys Hostel 1">
+                                    Boys Hostel 1
+                                </option>
+
+                                <option value="Boys Hostel 2">
+                                    Boys Hostel 2
+                                </option>
+
+                                <option value="Boys Hostel 3">
+                                    Boys Hostel 3
+                                </option>
+
+                                <option value="Boys Hostel 4">
+                                    Boys Hostel 4
+                                </option>
+
+                                <option value="Boys Hostel 5">
+                                    Boys Hostel 5
+                                </option>
+
+                                <option value="Boys Hostel 6">
+                                    Boys Hostel 6
+                                </option>
+
+                                <option value="Boys Hostel 7">
+                                    Boys Hostel 7
+                                </option>
+
+                                <option value="Boys Hostel 8">
+                                    Boys Hostel 8
+                                </option>
+
+                                <option value="Girls Hostel 1">
+                                    Girls Hostel 1
+                                </option>
+
+                                <option value="Girls Hostel 2">
+                                    Girls Hostel 2
+                                </option>
+
+                                <option value="Special Block">
+                                    Special Block
+                                </option>
+
+                                <option value="Academic Block 1">
+                                    Academic Block 1
+                                </option>
+
+                                <option value="Academic Block 2">
+                                    Academic Block 2
+                                </option>
+
+                                <option value="Lab Complex">
+                                    Lab Complex
+                                </option>
+
+                                <option value="Architecture Building">
+                                    Architecture Building
+                                </option>
+
+                                <option value="Parking Area 1">
+                                    Parking Area 1
+                                </option>
+
+                                <option value="Parking Area 2">
+                                    Parking Area 2
+                                </option>
+
+                                <option value="Mayuri Boys Mess">
+                                    Mayuri Boys Mess
+                                </option>
+
+                                <option value="JMD Mess">
+                                    JMD Mess
+                                </option>
+
+                                <option value="Anchor Mess">
+                                    Anchor Mess
+                                </option>
+
+                                <option value="Ressence Mess">
+                                    Ressence Mess
+                                </option>
+
+                                <option value="Safal Mess">
+                                    Safal Mess
+                                </option>
+
+                                <option value="Mayuri Girls Mess">
+                                    Mayuri Girls Mess
+                                </option>
+
+                                <option value="AB Girls Mess">
+                                    AB Girls Mess
+                                </option>
+
+                                <option value="Canteen">
+                                    Canteen
+                                </option>
+
+                                <option value="Open Auditorium">
+                                    Open Auditorium
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+
+                        <label for="complaintDescription">
+
+                            Describe the problem
+
+                        </label>
+
+
+                        <textarea
+                            id="complaintDescription"
+                            rows="8"
+                            maxlength="600"
+                            placeholder="Describe exactly what is happening. For example: WiFi has not been working on the third floor since this morning..."
+                            required
+                        ></textarea>
+
+
+
+                        <div class="description-footer">
+
+
+                            <span>
+
+                                Add useful details so the issue can be identified quickly.
+
+                            </span>
+
+
+                            <span id="descriptionCount">
+
+                                0 / 600
+
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-group">
+
+
+                        <label>
+
+                            Supporting photo
+
+                            <span class="optional-text">
+                                Optional
+                            </span>
+
+                        </label>
+
+
+
+                        <label
+                            for="complaintImage"
+                            class="upload-area"
+                        >
+
+
+                            <div class="upload-icon">
+
+                                ↑
+
+                            </div>
+
+
+                            <strong>
+
+                                Upload an image
+
+                            </strong>
+
+
+                            <span>
+
+                                JPG, PNG or WebP
+
+                            </span>
+
+
+                            <input
+                                type="file"
+                                id="complaintImage"
+                                accept="image/jpeg,image/png,image/webp"
+                            >
+
+
+                        </label>
+
+
+
+                        <div
+                            class="selected-file"
+                            id="filePreview"
+                        ></div>
+
+
+                    </div>
+
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="form-buttons">
+
+
+                        <button
+                            type="reset"
+                            class="clear-button"
+                            id="clearFormButton"
+                        >
+
+                            Clear
+
+                        </button>
+
+
+
+                        <button
+                            type="submit"
+                            class="submit-button"
+                        >
+
+                            Submit complaint
+
+                            <span>
+                                →
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+
+                <!-- =================================================
+                     INFORMATION
+                ================================================== -->
+
+                <aside class="information-column">
+
+
+                    <div class="information-card">
+
+
+                        <div class="information-icon">
+                            ✦
+                        </div>
+
+
+                        <h3>
+                            What happens after you report?
+                        </h3>
+
+
+
+                        <div class="process-step">
+
+
+                            <span class="step-number">
+                                1
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+                                    Complaint registered
+                                </strong>
+
+                                <p>
+
+                                    CampusPulse creates a unique complaint ID.
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="process-step">
+
+
+                            <span class="step-number">
+                                2
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+                                    Admin review
+                                </strong>
+
+                                <p>
+
+                                    The campus administration reviews your complaint.
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="process-step">
+
+
+                            <span class="step-number">
+                                3
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+                                    Work begins
+                                </strong>
+
+                                <p>
+
+                                    The responsible campus team handles the issue.
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="process-step">
+
+
+                            <span class="step-number">
+                                4
+                            </span>
+
+
+                            <div>
+
+                                <strong>
+                                    Complaint resolved
+                                </strong>
+
+                                <p>
+
+                                    You can view the final resolution in your history.
+
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ACTIVE COMPLAINTS
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="activeSection"
+        >
+
+
+            <div class="section-heading">
+
+
+                <p class="eyebrow">
+                    ACTIVE COMPLAINTS
+                </p>
+
+
+                <h2>
+                    Complaints being handled
+                </h2>
+
+
+                <p>
+
+                    These complaints have not yet been resolved.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div
+                class="complaint-list full-list"
+                id="activeComplaintList"
+            ></div>
+
+
+
+            <div
+                class="empty-state"
+                id="activeEmptyState"
+            >
+
+
+                <div class="empty-icon">
+                    ✓
+                </div>
+
+
+                <h3>
+                    No active complaints
+                </h3>
+
+
+                <p>
+
+                    You currently have no unresolved complaints.
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             HISTORY
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="historySection"
+        >
+
+
+            <div class="history-top">
+
+
+                <div class="section-heading">
+
+
+                    <p class="eyebrow">
+                        COMPLAINT HISTORY
+                    </p>
+
+
+                    <h2>
+                        Your previous reports
+                    </h2>
+
+
+                    <p>
+
+                        View all complaints submitted from your account.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <div class="history-filter-container">
+
+
+                    <button
+                        class="history-filter active"
+                        data-filter="all"
+                    >
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        class="history-filter"
+                        data-filter="active"
+                    >
+
+                        Active
+
+                    </button>
+
+
+                    <button
+                        class="history-filter"
+                        data-filter="resolved"
+                    >
+
+                        Resolved
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div
+                class="complaint-list full-list"
+                id="historyComplaintList"
+            ></div>
+
+
+
+            <div
+                class="empty-state"
+                id="historyEmptyState"
+            >
+
+
+                <div class="empty-icon">
+                    ▣
+                </div>
+
+
+                <h3>
+                    No complaints found
+                </h3>
+
+
+                <p>
+
+                    Your submitted complaints will appear here.
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PROFILE
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="profileSection"
+        >
+
+
+            <div class="section-heading">
+
+
+                <p class="eyebrow">
+                    STUDENT PROFILE
+                </p>
+
+
+                <h2>
+                    Your CampusPulse account
+                </h2>
+
+
+                <p>
+
+                    Your identity is verified using your
+                    VIT Bhopal Google account.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="profile-container">
+
+
+                <div class="profile-header-card">
+
+
+                    <img
+                        src=""
+                        id="profileLargeAvatar"
+                        class="profile-large-avatar"
+                        alt="Student"
+                    >
+
+
+                    <div>
+
+
+                        <h3 id="profileName">
+
+                            Student
+
+                        </h3>
+
+
+                        <p id="profileEmail">
+
+                            student@vitbhopal.ac.in
+
+                        </p>
+
+
+                        <span class="verified-badge">
+
+                            ✓ Verified VIT Bhopal Account
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="profile-details">
+
+
+                    <div class="profile-detail-row">
+
+
+                        <span>
+                            Account type
+                        </span>
+
+
+                        <strong>
+                            Student
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <div class="profile-detail-row">
+
+
+                        <span>
+                            University
+                        </span>
+
+
+                        <strong>
+                            VIT Bhopal University
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <div class="profile-detail-row">
+
+
+                        <span>
+                            Login method
+                        </span>
+
+
+                        <strong>
+                            Google Authentication
+                        </strong>
+
+
+                    </div>
+
+
+
+                    <div class="profile-detail-row">
+
+
+                        <span>
+                            Complaints submitted
+                        </span>
+
+
+                        <strong id="profileComplaintCount">
+
+                            0
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button
+                    class="profile-logout-button"
+                    id="profileLogout"
+                >
+
+                    Sign out of CampusPulse
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     COMPLAINT DETAILS MODAL
+====================================================== -->
+
+<div
+    class="modal-overlay"
+    id="complaintModal"
+>
+
+
+    <div class="complaint-modal">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+
+                <p class="eyebrow">
+
+                    COMPLAINT DETAILS
+
+                </p>
+
+
+                <h2 id="modalComplaintTitle">
+
+                    Complaint
+
+                </h2>
+
+
+            </div>
+
+
+
+            <button
+                class="modal-close"
+                id="closeComplaintModal"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <div class="complaint-id-bar">
+
+
+            <span id="modalComplaintId">
+
+                CP-0000
+
+            </span>
+
+
+            <span
+                class="status-badge"
+                id="modalStatus"
+            >
+
+                Submitted
+
+            </span>
+
+
+        </div>
+
+
+
+        <div class="detail-grid">
+
+
+            <div>
+
+
+                <span>
+                    Category
+                </span>
+
+
+                <strong id="modalCategory">
+
+                    -
+
+                </strong>
+
+
+            </div>
+
+
+
+            <div>
+
+
+                <span>
+                    Location
+                </span>
+
+
+                <strong id="modalLocation">
+
+                    -
+
+                </strong>
+
+
+            </div>
+
+
+
+            <div>
+
+
+                <span>
+                    Submitted
+                </span>
+
+
+                <strong id="modalDate">
+
+                    -
+
+                </strong>
+
+
+            </div>
+
+
+
+            <div>
+
+
+                <span>
+                    Status
+                </span>
+
+
+                <strong id="modalStatusText">
+
+                    -
+
+                </strong>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="description-box">
+
+
+            <span>
+                Complaint description
+            </span>
+
+
+            <p id="modalDescription">
+
+                -
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="timeline-container">
+
+
+            <p class="eyebrow">
+
+                STATUS TIMELINE
+
+            </p>
+
+
+            <div
+                class="status-timeline"
+                id="statusTimeline"
+            ></div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+
+    Complaint submitted successfully.
+
+</div>
+
+
+
+<script
+    type="module"
+    src="student-dashboard.js"
+></script>
+
+
+</body>
+
+</html>

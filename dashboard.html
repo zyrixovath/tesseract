@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusPulse | Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<div class="app-shell">
+
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="logo">
+                CP
+            </div>
+
+            <div>
+                <h2>CampusPulse</h2>
+                <span>Campus Intelligence</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button class="nav-item active" data-page="overview">
+                <span class="nav-icon">⌂</span>
+                <span>Overview</span>
+            </button>
+
+            <button class="nav-item" data-page="report">
+                <span class="nav-icon">＋</span>
+                <span>Report Issue</span>
+            </button>
+
+            <button class="nav-item" data-page="issues">
+                <span class="nav-icon">◎</span>
+                <span>Campus Issues</span>
+            </button>
+
+            <button class="nav-item" data-page="map">
+                <span class="nav-icon">⌖</span>
+                <span>Campus Map</span>
+            </button>
+
+            <button class="nav-item" data-page="myreports">
+                <span class="nav-icon">▣</span>
+                <span>My Reports</span>
+            </button>
+
+            <button class="nav-item" data-page="alerts">
+                <span class="nav-icon">⚡</span>
+                <span>Alerts</span>
+
+                <span class="nav-badge">
+                    3
+                </span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-divider"></div>
+
+
+        <div class="campus-health">
+
+            <p class="small-label">
+                CAMPUS HEALTH
+            </p>
+
+            <div class="health-score">
+
+                <div class="health-circle">
+                    82
+                </div>
+
+                <div>
+                    <strong>Good</strong>
+                    <span>
+                        18 issues resolved today
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="system-status">
+                <span class="online-dot"></span>
+                Campus systems online
+            </div>
+
+            <p>
+                CampusPulse v1.0
+            </p>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+         ========================= -->
+
+    <main class="main-content">
+
+
+        <!-- =========================
+             TOPBAR
+             ========================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="top-label">
+                    CAMPUS OVERVIEW
+                </p>
+
+                <h1 id="greeting">
+                    Good evening 👋
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <button class="icon-button" id="notificationButton">
+                    🔔
+
+                    <span class="notification-dot"></span>
+                </button>
+
+
+                <div class="user-profile" id="userProfile">
+
+                    <img
+                        id="userAvatar"
+                        src="https://ui-avatars.com/api/?name=Campus+User"
+                        alt="User profile"
+                    >
+
+                    <div class="user-info">
+
+                        <strong id="userName">
+                            Campus User
+                        </strong>
+
+                        <span id="userEmail">
+                            student@vitbhopal.ac.in
+                        </span>
+
+                    </div>
+
+                    <button class="profile-arrow">
+                        ▾
+                    </button>
+
+                </div>
+
+
+                <div class="profile-menu" id="profileMenu">
+
+                    <button>
+                        My Profile
+                    </button>
+
+                    <button>
+                        Settings
+                    </button>
+
+                    <button id="logoutButton" class="logout-menu">
+                        Sign out
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             WELCOME HERO
+             ========================= -->
+
+        <section class="welcome-panel">
+
+            <div>
+
+                <div class="live-pill">
+                    <span></span>
+                    Live Campus Intelligence
+                </div>
+
+                <h2>
+                    What's happening on campus today?
+                </h2>
+
+                <p>
+                    Report problems, support existing incidents,
+                    and help CampusPulse identify recurring campus issues.
+                </p>
+
+                <button class="primary-button" id="reportIssueButton">
+                    <span>＋</span>
+                    Report a campus problem
+                </button>
+
+            </div>
+
+
+            <div class="pulse-visual">
+
+                <div class="pulse-circle pulse-circle-one"></div>
+                <div class="pulse-circle pulse-circle-two"></div>
+
+                <div class="center-pulse">
+                    <span class="pulse-icon">
+                        ⚡
+                    </span>
+
+                    <strong>
+                        LIVE
+                    </strong>
+
+                    <small>
+                        Campus Pulse
+                    </small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             STAT CARDS
+             ========================= -->
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon red">
+                        !
+                    </div>
+
+                    <span class="trend danger">
+                        +2 today
+                    </span>
+
+                </div>
+
+                <p>
+                    Critical Issues
+                </p>
+
+                <h3>
+                    3
+                </h3>
+
+                <span class="stat-description">
+                    Need immediate attention
+                </span>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon orange">
+                        ◷
+                    </div>
+
+                    <span class="trend">
+                        Active
+                    </span>
+
+                </div>
+
+                <p>
+                    Open Issues
+                </p>
+
+                <h3>
+                    12
+                </h3>
+
+                <span class="stat-description">
+                    Across the campus
+                </span>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <span class="trend positive">
+                        +18
+                    </span>
+
+                </div>
+
+                <p>
+                    Resolved Today
+                </p>
+
+                <h3>
+                    18
+                </h3>
+
+                <span class="stat-description">
+                    Campus response improving
+                </span>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon blue">
+                        ◎
+                    </div>
+
+                    <span class="trend positive">
+                        94%
+                    </span>
+
+                </div>
+
+                <p>
+                    Smart Matches
+                </p>
+
+                <h3>
+                    27
+                </h3>
+
+                <span class="stat-description">
+                    Duplicate reports detected
+                </span>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =========================
+             MAIN DASHBOARD GRID
+             ========================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- =========================
+                 LIVE ISSUES
+                 ========================= -->
+
+            <div class="panel issues-panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            LIVE CAMPUS ISSUES
+                        </p>
+
+                        <h3>
+                            What students are reporting
+                        </h3>
+
+                    </div>
+
+
+                    <button class="text-button">
+                        View all →
+                    </button>
+
+                </div>
+
+
+
+                <!-- FILTERS -->
+
+                <div class="filters">
+
+                    <button class="filter active" data-filter="all">
+                        All
+                    </button>
+
+                    <button class="filter" data-filter="critical">
+                        Critical
+                    </button>
+
+                    <button class="filter" data-filter="infrastructure">
+                        Infrastructure
+                    </button>
+
+                    <button class="filter" data-filter="hostel">
+                        Hostel
+                    </button>
+
+                    <button class="filter" data-filter="transport">
+                        Transport
+                    </button>
+
+                </div>
+
+
+
+                <!-- ISSUE LIST -->
+
+                <div class="issue-list" id="issueList">
+
+
+                    <article
+                        class="issue-card"
+                        data-category="critical hostel"
+                    >
+
+                        <div class="severity-line critical"></div>
+
+
+                        <div class="issue-content">
+
+                            <div class="issue-header">
+
+                                <div>
+
+                                    <div class="issue-tags">
+
+                                        <span class="tag critical-tag">
+                                            CRITICAL
+                                        </span>
+
+                                        <span class="tag">
+                                            HOSTEL
+                                        </span>
+
+                                    </div>
+
+                                    <h4>
+                                        Hostel Block 2 WiFi outage
+                                    </h4>
+
+                                </div>
+
+
+                                <button class="upvote-button">
+
+                                    <span>▲</span>
+
+                                    <span class="vote-count">
+                                        34
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+
+                            <p>
+                                Multiple students are reporting
+                                complete WiFi failure across several
+                                floors in Boys Hostel Block 2.
+                            </p>
+
+
+                            <div class="issue-meta">
+
+                                <span>
+                                    📍 Boys Hostel Block 2
+                                </span>
+
+                                <span>
+                                    ◷ 18 min ago
+                                </span>
+
+                                <span>
+                                    👥 17 reports
+                                </span>
+
+                            </div>
+
+
+                            <div class="ai-detection">
+
+                                <span class="ai-icon">
+                                    ✦
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        CampusPulse Smart Match
+                                    </strong>
+
+                                    <p>
+                                        17 reports detected as the same
+                                        incident with 94% confidence.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article
+                        class="issue-card"
+                        data-category="infrastructure"
+                    >
+
+                        <div class="severity-line medium"></div>
+
+
+                        <div class="issue-content">
+
+                            <div class="issue-header">
+
+                                <div>
+
+                                    <div class="issue-tags">
+
+                                        <span class="tag medium-tag">
+                                            MODERATE
+                                        </span>
+
+                                        <span class="tag">
+                                            INFRASTRUCTURE
+                                        </span>
+
+                                    </div>
+
+                                    <h4>
+                                        Water cooler leaking near Academic Block 1
+                                    </h4>
+
+                                </div>
+
+
+                                <button class="upvote-button">
+
+                                    <span>▲</span>
+
+                                    <span class="vote-count">
+                                        11
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+
+                            <p>
+                                Continuous water leakage reported
+                                near the first-floor corridor.
+                            </p>
+
+
+                            <div class="issue-meta">
+
+                                <span>
+                                    📍 Academic Block 1
+                                </span>
+
+                                <span>
+                                    ◷ 42 min ago
+                                </span>
+
+                                <span>
+                                    👥 4 reports
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article
+                        class="issue-card"
+                        data-category="transport"
+                    >
+
+                        <div class="severity-line medium"></div>
+
+
+                        <div class="issue-content">
+
+                            <div class="issue-header">
+
+                                <div>
+
+                                    <div class="issue-tags">
+
+                                        <span class="tag medium-tag">
+                                            MODERATE
+                                        </span>
+
+                                        <span class="tag">
+                                            TRANSPORT
+                                        </span>
+
+                                    </div>
+
+                                    <h4>
+                                        Bus Route 7 overcrowded during morning trip
+                                    </h4>
+
+                                </div>
+
+
+                                <button class="upvote-button">
+
+                                    <span>▲</span>
+
+                                    <span class="vote-count">
+                                        28
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+
+                            <p>
+                                Students report standing throughout
+                                the route with insufficient capacity
+                                during peak hours.
+                            </p>
+
+
+                            <div class="issue-meta">
+
+                                <span>
+                                    📍 Transport
+                                </span>
+
+                                <span>
+                                    ◷ 1 hr ago
+                                </span>
+
+                                <span>
+                                    👥 9 reports
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article
+                        class="issue-card"
+                        data-category="hostel"
+                    >
+
+                        <div class="severity-line low"></div>
+
+
+                        <div class="issue-content">
+
+                            <div class="issue-header">
+
+                                <div>
+
+                                    <div class="issue-tags">
+
+                                        <span class="tag low-tag">
+                                            LOW
+                                        </span>
+
+                                        <span class="tag">
+                                            HOSTEL
+                                        </span>
+
+                                    </div>
+
+                                    <h4>
+                                        Laundry machine not working
+                                    </h4>
+
+                                </div>
+
+
+                                <button class="upvote-button">
+
+                                    <span>▲</span>
+
+                                    <span class="vote-count">
+                                        7
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+
+                            <p>
+                                Machine 3 on the hostel ground floor
+                                has stopped during multiple wash cycles.
+                            </p>
+
+
+                            <div class="issue-meta">
+
+                                <span>
+                                    📍 Boys Hostel Block 1
+                                </span>
+
+                                <span>
+                                    ◷ 2 hr ago
+                                </span>
+
+                                <span>
+                                    👥 3 reports
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 RIGHT COLUMN
+                 ========================= -->
+
+            <div class="right-column">
+
+
+                <!-- HOTSPOTS -->
+
+                <div class="panel hotspot-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <p class="section-label">
+                                CAMPUS HOTSPOTS
+                            </p>
+
+                            <h3>
+                                Problem zones
+                            </h3>
+
+                        </div>
+
+                        <button class="map-button">
+                            Map →
+                        </button>
+
+                    </div>
+
+
+                    <div class="hotspot-list">
+
+
+                        <div class="hotspot-item">
+
+                            <div class="hotspot-number">
+                                1
+                            </div>
+
+                            <div class="hotspot-info">
+
+                                <strong>
+                                    Boys Hostel Block 2
+                                </strong>
+
+                                <span>
+                                    WiFi • Water • Electricity
+                                </span>
+
+                            </div>
+
+                            <div class="hotspot-count red-count">
+                                12
+                            </div>
+
+                        </div>
+
+
+                        <div class="hotspot-item">
+
+                            <div class="hotspot-number">
+                                2
+                            </div>
+
+                            <div class="hotspot-info">
+
+                                <strong>
+                                    Academic Block 1
+                                </strong>
+
+                                <span>
+                                    Water • Classroom
+                                </span>
+
+                            </div>
+
+                            <div class="hotspot-count orange-count">
+                                8
+                            </div>
+
+                        </div>
+
+
+                        <div class="hotspot-item">
+
+                            <div class="hotspot-number">
+                                3
+                            </div>
+
+                            <div class="hotspot-info">
+
+                                <strong>
+                                    Main Transport Area
+                                </strong>
+
+                                <span>
+                                    Bus • Parking
+                                </span>
+
+                            </div>
+
+                            <div class="hotspot-count">
+                                6
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AI INSIGHT -->
+
+                <div class="panel insight-panel">
+
+                    <div class="ai-title">
+
+                        <div class="ai-symbol">
+                            ✦
+                        </div>
+
+                        <div>
+
+                            <p class="section-label">
+                                CAMPUSPULSE AI
+                            </p>
+
+                            <h3>
+                                Pattern detected
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="insight-text">
+
+                        Reports related to WiFi in Boys Hostel Block 2
+                        increased significantly in the last hour.
+
+                    </p>
+
+
+                    <div class="insight-stat">
+
+                        <span>
+                            17 similar reports
+                        </span>
+
+                        <strong>
+                            94% match
+                        </strong>
+
+                    </div>
+
+
+                    <button class="secondary-button">
+                        View incident cluster
+                    </button>
+
+                </div>
+
+
+
+                <!-- ACTIVITY -->
+
+                <div class="panel activity-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <p class="section-label">
+                                RECENT ACTIVITY
+                            </p>
+
+                            <h3>
+                                Campus updates
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-list">
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon resolved">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <p>
+                                    Classroom AC issue resolved
+                                </p>
+
+                                <span>
+                                    Academic Block 2 • 12 min ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon cluster">
+                                ◎
+                            </div>
+
+                            <div>
+
+                                <p>
+                                    4 reports merged into one incident
+                                </p>
+
+                                <span>
+                                    Hostel Block 2 • 18 min ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon new">
+                                +
+                            </div>
+
+                            <div>
+
+                                <p>
+                                    New transport issue reported
+                                </p>
+
+                                <span>
+                                    Main Gate • 31 min ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================
+     REPORT ISSUE MODAL
+     ========================= -->
+
+<div class="modal-overlay" id="reportModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="section-label">
+                    NEW CAMPUS REPORT
+                </p>
+
+                <h2>
+                    Report a problem
+                </h2>
+
+            </div>
+
+            <button
+                class="close-modal"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p class="modal-description">
+            Tell us what's happening. CampusPulse will check
+            whether similar incidents have already been reported.
+        </p>
+
+
+        <form id="issueForm">
+
+            <div class="form-group">
+
+                <label>
+                    Issue title
+                </label>
+
+                <input
+                    type="text"
+                    id="issueTitle"
+                    placeholder="e.g. WiFi not working in Hostel Block 2"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select id="issueCategory" required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option>
+                            Infrastructure
+                        </option>
+
+                        <option>
+                            Hostel
+                        </option>
+
+                        <option>
+                            Transport
+                        </option>
+
+                        <option>
+                            Electricity
+                        </option>
+
+                        <option>
+                            Water
+                        </option>
+
+                        <option>
+                            Safety
+                        </option>
+
+                        <option>
+                            Internet
+                        </option>
+
+                        <option>
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <select id="issueLocation" required>
+
+                        <option value="">
+                            Select location
+                        </option>
+
+                        <option>
+                            Academic Block 1
+                        </option>
+
+                        <option>
+                            Academic Block 2
+                        </option>
+
+                        <option>
+                            Boys Hostel Block 1
+                        </option>
+
+                        <option>
+                            Boys Hostel Block 2
+                        </option>
+
+                        <option>
+                            Girls Hostel
+                        </option>
+
+                        <option>
+                            Main Gate
+                        </option>
+
+                        <option>
+                            Cafeteria
+                        </option>
+
+                        <option>
+                            Transport Area
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="issueDescription"
+                    rows="5"
+                    placeholder="Describe the problem clearly..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Severity
+                </label>
+
+                <div class="severity-selector">
+
+                    <button
+                        type="button"
+                        class="severity-option selected"
+                        data-severity="low"
+                    >
+                        Low
+                    </button>
+
+                    <button
+                        type="button"
+                        class="severity-option"
+                        data-severity="moderate"
+                    >
+                        Moderate
+                    </button>
+
+                    <button
+                        type="button"
+                        class="severity-option"
+                        data-severity="critical"
+                    >
+                        Critical
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button class="submit-report" type="submit">
+                Submit report
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+    Issue submitted successfully.
+</div>
+
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
