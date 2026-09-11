@@ -1,4 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
 
 import {
     getAuth,
@@ -6,6 +9,7 @@ import {
     signInWithPopup,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
 
 
 /* =====================================================
@@ -31,6 +35,11 @@ const firebaseConfig = {
 };
 
 
+
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
+
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
@@ -38,17 +47,11 @@ const auth = getAuth(app);
 
 
 /* =====================================================
-   ADMIN ACCOUNTS
+   FLASK BACKEND
 ===================================================== */
 
-const ADMIN_EMAILS = [
-
-    "aditya.26bce10029@vitbhopal.ac.in"
-
-    // Add other admin emails here:
-    // ,"anotheradmin@vitbhopal.ac.in"
-
-];
+const BACKEND_URL =
+    "http://127.0.0.1:5000";
 
 
 
@@ -56,7 +59,8 @@ const ADMIN_EMAILS = [
    GOOGLE PROVIDER
 ===================================================== */
 
-const provider = new GoogleAuthProvider();
+const provider =
+    new GoogleAuthProvider();
 
 
 provider.setCustomParameters({
@@ -70,7 +74,7 @@ provider.setCustomParameters({
 
 
 /* =====================================================
-   ELEMENTS
+   PAGE ELEMENTS
 ===================================================== */
 
 const studentRole =
@@ -98,7 +102,9 @@ const selectedTitle =
 
 
 const selectedDescription =
-    document.getElementById("selectedDescription");
+    document.getElementById(
+        "selectedDescription"
+    );
 
 
 const infoIcon =
@@ -110,10 +116,8 @@ const infoIcon =
    DEFAULT ROLE
 ===================================================== */
 
-let selectedRole = "student";
-
-
-console.log("Default role:", selectedRole);
+let selectedRole =
+    "student";
 
 
 
@@ -121,37 +125,44 @@ console.log("Default role:", selectedRole);
    SELECT STUDENT
 ===================================================== */
 
-studentRole.addEventListener("click", () => {
+studentRole.addEventListener(
+    "click",
+    () => {
 
-    selectedRole = "student";
-
-    console.log("Selected role:", selectedRole);
-
-
-    studentRole.classList.add("active");
-
-    adminRole.classList.remove("active");
+        selectedRole =
+            "student";
 
 
-    googleButtonText.textContent =
-        "Continue as Student with Google";
+        studentRole.classList.add(
+            "active"
+        );
 
 
-    selectedTitle.textContent =
-        "Student Access";
+        adminRole.classList.remove(
+            "active"
+        );
 
 
-    selectedDescription.textContent =
-        "Submit complaints, track their status and view your complaint history.";
+        googleButtonText.textContent =
+            "Continue as Student with Google";
 
 
-    infoIcon.textContent =
-        "🎓";
+        selectedTitle.textContent =
+            "Student Access";
 
 
-    loginMessage.textContent = "";
+        selectedDescription.textContent =
+            "Submit complaints, track their status and view your complaint history.";
 
-});
+
+        infoIcon.textContent =
+            "🎓";
+
+
+        clearMessage();
+
+    }
+);
 
 
 
@@ -159,37 +170,44 @@ studentRole.addEventListener("click", () => {
    SELECT ADMIN
 ===================================================== */
 
-adminRole.addEventListener("click", () => {
+adminRole.addEventListener(
+    "click",
+    () => {
 
-    selectedRole = "admin";
-
-    console.log("Selected role:", selectedRole);
-
-
-    adminRole.classList.add("active");
-
-    studentRole.classList.remove("active");
+        selectedRole =
+            "admin";
 
 
-    googleButtonText.textContent =
-        "Continue as Administrator with Google";
+        adminRole.classList.add(
+            "active"
+        );
 
 
-    selectedTitle.textContent =
-        "Administrator Access";
+        studentRole.classList.remove(
+            "active"
+        );
 
 
-    selectedDescription.textContent =
-        "View campus-wide complaints, analytics and manage complaint status.";
+        googleButtonText.textContent =
+            "Continue as Administrator with Google";
 
 
-    infoIcon.textContent =
-        "🛡";
+        selectedTitle.textContent =
+            "Administrator Access";
 
 
-    loginMessage.textContent = "";
+        selectedDescription.textContent =
+            "View campus-wide complaints, analytics and manage complaint status.";
 
-});
+
+        infoIcon.textContent =
+            "🛡";
+
+
+        clearMessage();
+
+    }
+);
 
 
 
@@ -197,114 +215,134 @@ adminRole.addEventListener("click", () => {
    GOOGLE LOGIN
 ===================================================== */
 
-googleLogin.addEventListener("click", async () => {
+googleLogin.addEventListener(
+    "click",
+    async () => {
 
 
-    console.log("Login requested as:", selectedRole);
+        try {
 
 
-    try {
+            googleLogin.disabled =
+                true;
 
 
-        googleLogin.disabled = true;
-
-
-        loginMessage.style.color = "#91a1b6";
-
-        loginMessage.textContent =
-            "Opening Google sign-in...";
-
-
-
-        /* GOOGLE LOGIN */
-
-        const result =
-            await signInWithPopup(
-                auth,
-                provider
-            );
-
-
-        const user =
-            result.user;
-
-
-        const email =
-            (user.email || "")
-                .toLowerCase()
-                .trim();
-
-
-
-        console.log("Google login successful");
-
-        console.log("Email:", email);
-
-        console.log("Requested role:", selectedRole);
-
-
-
-        /* =================================================
-           DOMAIN CHECK
-        ================================================= */
-
-        if (
-            !email.endsWith(
-                "@vitbhopal.ac.in"
-            )
-        ) {
-
-
-            console.log(
-                "Rejected: not a VIT Bhopal email"
-            );
-
-
-            await signOut(auth);
-
-
-            showError(
-                "Please sign in using your official VIT Bhopal account."
-            );
-
-
-            return;
-
-        }
-
-
-
-        /* =================================================
-           STUDENT LOGIN
-        ================================================= */
-
-        if (
-            selectedRole === "student"
-        ) {
-
-
-            console.log(
-                "STUDENT LOGIN ACCEPTED"
+            showMessage(
+                "Opening Google sign-in...",
+                "#91a1b6"
             );
 
 
 
-            const studentData = {
+            /* =========================================
+               FIREBASE GOOGLE LOGIN
+            ========================================== */
 
-                uid: user.uid,
+            const result =
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+
+            const user =
+                result.user;
+
+
+
+            /* =========================================
+               GET FIREBASE TOKEN
+            ========================================== */
+
+            const idToken =
+                await user.getIdToken();
+
+
+
+            showMessage(
+                "Verifying your account with CampusPulse...",
+                "#91a1b6"
+            );
+
+
+
+            /* =========================================
+               SEND TOKEN TO FLASK
+            ========================================== */
+
+            const response =
+                await fetch(
+                    `${BACKEND_URL}/api/auth/google`,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body: JSON.stringify({
+
+                            token:
+                                idToken,
+
+                            role:
+                                selectedRole
+
+                        })
+
+                    }
+                );
+
+
+
+            const data =
+                await response.json();
+
+
+
+            /* =========================================
+               BACKEND REJECTED LOGIN
+            ========================================== */
+
+            if (!response.ok) {
+
+
+                await signOut(auth);
+
+
+                throw new Error(
+                    data.message ||
+                    "Login was rejected."
+                );
+
+            }
+
+
+
+            /* =========================================
+               LOGIN SUCCESSFUL
+            ========================================== */
+
+            const campusUser = {
+
+                uid:
+                    data.user.uid,
 
                 name:
-                    user.displayName ||
-                    "Student",
+                    data.user.name,
 
                 email:
-                    user.email,
+                    data.user.email,
 
                 photo:
-                    user.photoURL,
+                    data.user.photo,
 
                 role:
-                    "student"
+                    data.user.role
 
             };
 
@@ -315,84 +353,38 @@ googleLogin.addEventListener("click", async () => {
                 "campusUser",
 
                 JSON.stringify(
-                    studentData
+                    campusUser
                 )
 
             );
 
 
 
-            console.log(
-                "Student data stored:",
-                studentData
+            showMessage(
+                `Welcome ${getFirstName(campusUser.name)}!`,
+                "#49dfa6"
             );
 
 
-            loginMessage.style.color =
-                "#49dfa6";
 
-
-            loginMessage.textContent =
-                `Welcome ${getFirstName(user.displayName)}! Opening student portal...`;
-
-
-
-            /*
-            IMPORTANT:
-            THIS MUST MATCH THE EXACT FILE NAME
-            */
-
-            setTimeout(() => {
-
-                console.log(
-                    "Redirecting to student-dashboard.html"
-                );
-
-
-                window.location.href =
-                    "./student-dashboard.html";
-
-            }, 500);
-
-
-            return;
-
-        }
-
-
-
-        /* =================================================
-           ADMIN LOGIN
-        ================================================= */
-
-        if (
-            selectedRole === "admin"
-        ) {
-
-
-            console.log(
-                "Checking administrator permissions..."
-            );
-
-
+            /* =========================================
+               STUDENT REDIRECT
+            ========================================== */
 
             if (
-                !ADMIN_EMAILS.includes(
-                    email
-                )
+                campusUser.role ===
+                "student"
             ) {
 
 
-                console.log(
-                    "ADMIN ACCESS DENIED"
-                );
+                setTimeout(
+                    () => {
 
+                        window.location.href =
+                            "./student-dashboard.html";
 
-                await signOut(auth);
-
-
-                showError(
-                    "This VIT Bhopal account is not authorized as an administrator."
+                    },
+                    600
                 );
 
 
@@ -402,170 +394,169 @@ googleLogin.addEventListener("click", async () => {
 
 
 
-            console.log(
-                "ADMIN LOGIN ACCEPTED"
+            /* =========================================
+               ADMIN REDIRECT
+            ========================================== */
+
+            if (
+                campusUser.role ===
+                "admin"
+            ) {
+
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "./dashboard.html";
+
+                    },
+                    600
+                );
+
+
+                return;
+
+            }
+
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(
+                "CampusPulse login error:",
+                error
             );
 
 
-
-            const adminData = {
-
-                uid:
-                    user.uid,
-
-                name:
-                    user.displayName ||
-                    "Administrator",
-
-                email:
-                    user.email,
-
-                photo:
-                    user.photoURL,
-
-                role:
-                    "admin"
-
-            };
+            googleLogin.disabled =
+                false;
 
 
 
-            sessionStorage.setItem(
+            /* POPUP CLOSED */
 
-                "campusUser",
+            if (
+                error.code ===
+                "auth/popup-closed-by-user"
+            ) {
 
-                JSON.stringify(
-                    adminData
-                )
 
+                showMessage(
+                    "Google sign-in cancelled.",
+                    "#91a1b6"
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* POPUP BLOCKED */
+
+            if (
+                error.code ===
+                "auth/popup-blocked"
+            ) {
+
+
+                showError(
+                    "Google sign-in popup was blocked. Please allow popups."
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* FIREBASE DOMAIN ERROR */
+
+            if (
+                error.code ===
+                "auth/unauthorized-domain"
+            ) {
+
+
+                showError(
+                    "This website is not authorized in Firebase Authentication."
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* BACKEND CONNECTION ERROR */
+
+            if (
+                error instanceof TypeError
+            ) {
+
+
+                showError(
+                    "CampusPulse backend is not running. Start Flask and try again."
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* OTHER ERROR */
+
+            showError(
+                error.message ||
+                "Login failed."
             );
 
-
-
-            loginMessage.style.color =
-                "#49dfa6";
-
-
-            loginMessage.textContent =
-                `Welcome Administrator ${getFirstName(user.displayName)}!`;
-
-
-
-            setTimeout(() => {
-
-
-                window.location.href =
-                    "./dashboard.html";
-
-
-            }, 500);
-
-
-            return;
 
         }
 
 
     }
-
-
-    catch (error) {
-
-
-        console.error(
-            "CAMPUSPULSE LOGIN ERROR:",
-            error
-        );
-
-
-        console.error(
-            "Error code:",
-            error.code
-        );
-
-
-        console.error(
-            "Error message:",
-            error.message
-        );
-
-
-        googleLogin.disabled =
-            false;
-
-
-
-        if (
-            error.code ===
-            "auth/popup-closed-by-user"
-        ) {
-
-
-            loginMessage.style.color =
-                "#91a1b6";
-
-
-            loginMessage.textContent =
-                "Google sign-in cancelled.";
-
-
-            return;
-
-        }
-
-
-
-        if (
-            error.code ===
-            "auth/popup-blocked"
-        ) {
-
-
-            showError(
-                "Google sign-in popup was blocked. Please allow popups."
-            );
-
-
-            return;
-
-        }
-
-
-
-        if (
-            error.code ===
-            "auth/unauthorized-domain"
-        ) {
-
-
-            showError(
-                "This domain is not authorized in Firebase."
-            );
-
-
-            return;
-
-        }
-
-
-
-        showError(
-            "Login failed. Check the browser console for the exact error."
-        );
-
-
-    }
-
-
-});
+);
 
 
 
 /* =====================================================
-   ERROR MESSAGE
+   SHOW NORMAL MESSAGE
 ===================================================== */
 
-function showError(message) {
+function showMessage(
+    message,
+    color
+) {
+
+
+    loginMessage.style.color =
+        color;
+
+
+    loginMessage.textContent =
+        message;
+
+}
+
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(
+    message
+) {
 
 
     googleLogin.disabled =
@@ -584,10 +575,26 @@ function showError(message) {
 
 
 /* =====================================================
+   CLEAR MESSAGE
+===================================================== */
+
+function clearMessage() {
+
+
+    loginMessage.textContent =
+        "";
+
+}
+
+
+
+/* =====================================================
    FIRST NAME
 ===================================================== */
 
-function getFirstName(name) {
+function getFirstName(
+    name
+) {
 
 
     if (!name) {
