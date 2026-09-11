@@ -1,73 +1,362 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from datetime import datetime
-import random
+
+import firebase_admin
+
+from firebase_admin import credentials
+from firebase_admin import auth
+
 import os
 
+
+
+# =====================================================
+# FLASK APP
+# =====================================================
+
 app = Flask(__name__)
-CORS(app)
 
-# This looks for your Supabase URL in Render's settings. 
-# If it can't find it (like on your local computer), it safely falls back to SQLite.
-db_url = os.environ.get('DATABASE_URL', 'sqlite:///campuspulse.db')
-if db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": "*"
+        }
+    }
+)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-class Complaint(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    complaint_id = db.Column(db.String(20), unique=True)
-    title = db.Column(db.String(200), nullable=False)
-    category = db.Column(db.String(50), nullable=False)
-    location = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    severity = db.Column(db.String(20), default='low')
-    status = db.Column(db.String(50), default='Submitted')
-    reported_by = db.Column(db.String(100), nullable=False)
-    upvotes = db.Column(db.Integer, default=0)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-with app.app_context():
-    db.create_all()
+# =====================================================
+# FIREBASE ADMIN SETUP
+# =====================================================
 
-@app.route('/api/complaints', methods=['GET'])
-def get_complaints():
-    complaints = Complaint.query.order_by(Complaint.created_at.desc()).all()
-    return jsonify([{
-        'id': c.complaint_id,
-        'title': c.title,
-        'category': c.category,
-        'location': c.location,
-        'description': c.description,
-        'severity': c.severity,
-        'status': c.status,
-        'reportedBy': c.reported_by,
-        'upvotes': c.upvotes,
-        'createdAt': c.created_at.isoformat()
-    } for c in complaints])
+BASE_DIR = os.path.dirname(
+    os.path.abspath(__file__)
+)
 
-@app.route('/api/complaints', methods=['POST'])
-def create_complaint():
-    data = request.json
-    new_id = f"CP-{str(datetime.now().year)[-2:]}-{random.randint(1000, 9999)}"
-    
-    new_complaint = Complaint(
-        complaint_id=new_id,
-        title=data.get('title', f"{data['category']} issue at {data['location']}"),
-        category=data['category'],
-        location=data['location'],
-        description=data['description'],
-        severity=data.get('severity', 'low'),
-        reported_by=data.get('reportedBy', 'anonymous')
+
+SERVICE_ACCOUNT_PATH = os.path.join(
+    BASE_DIR,
+    "serviceAccountKey.json"
+)
+
+
+
+if not firebase_admin._apps:
+
+    cred = credentials.Certificate(
+        SERVICE_ACCOUNT_PATH
     )
-    db.session.add(new_complaint)
-    db.session.commit()
-    
-    return jsonify({"message": "Success", "id": new_id}), 201
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    firebase_admin.initialize_app(
+        cred
+    )
+
+
+
+# =====================================================
+# ADMIN ACCOUNTS
+# =====================================================
+
+ADMIN_EMAILS = [
+
+    "aditya.26bce10029@vitbhopal.ac.in"
+
+]
+
+
+
+# =====================================================
+# HOME ROUTE
+# =====================================================
+
+@app.route("/")
+def home():
+
+    return jsonify({
+
+        "success": True,
+
+        "message":
+            "CampusPulse backend is running!"
+
+    })
+
+
+
+# =====================================================
+# GOOGLE / FIREBASE LOGIN
+# =====================================================
+
+@app.route(
+    "/api/auth/google",
+    methods=["POST"]
+)
+def google_login():
+
+
+    try:
+
+
+        # ---------------------------------------------
+        # READ REQUEST
+        # ---------------------------------------------
+
+        data = request.get_json(
+            silent=True
+        )
+
+
+        if not data:
+
+            return jsonify({
+
+                "success": False,
+
+                "message":
+                    "Invalid request."
+
+            }), 400
+
+
+
+        token = data.get(
+            "token"
+        )
+
+
+        requested_role = data.get(
+            "role"
+        )
+
+
+
+        # ---------------------------------------------
+        # TOKEN CHECK
+        # ---------------------------------------------
+
+        if not token:
+
+            return jsonify({
+
+                "success": False,
+
+                "message":
+                    "Authentication token missing."
+
+            }), 400
+
+
+
+        if requested_role not in [
+            "student",
+            "admin"
+        ]:
+
+            return jsonify({
+
+                "success": False,
+
+                "message":
+                    "Invalid account role."
+
+            }), 400
+
+
+
+        # ---------------------------------------------
+        # VERIFY FIREBASE TOKEN
+        # ---------------------------------------------
+
+        decoded_token = (
+            auth.verify_id_token(
+                token
+            )
+        )
+
+
+
+        uid = decoded_token.get(
+            "uid"
+        )
+
+
+        email = (
+            decoded_token
+            .get("email", "")
+            .lower()
+            .strip()
+        )
+
+
+        name = decoded_token.get(
+            "name",
+            ""
+        )
+
+
+        photo = decoded_token.get(
+            "picture",
+            ""
+        )
+
+
+
+        # ---------------------------------------------
+        # EMAIL CHECK
+        # ---------------------------------------------
+
+        if not email:
+
+            return jsonify({
+
+                "success": False,
+
+                "message":
+                    "Google account email could not be verified."
+
+            }), 401
+
+
+
+        # ---------------------------------------------
+        # VIT BHOPAL DOMAIN CHECK
+        # ---------------------------------------------
+
+        if not email.endswith(
+            "@vitbhopal.ac.in"
+        ):
+
+            return jsonify({
+
+                "success": False,
+
+                "message":
+                    "Please use your official VIT Bhopal account."
+
+            }), 403
+
+
+
+        # ---------------------------------------------
+        # ADMIN CHECK
+        # ---------------------------------------------
+
+        if requested_role == "admin":
+
+            if email not in ADMIN_EMAILS:
+
+                return jsonify({
+
+                    "success": False,
+
+                    "message":
+                        "This account is not authorized as a CampusPulse administrator."
+
+                }), 403
+
+
+
+        # ---------------------------------------------
+        # USER DATA
+        # ---------------------------------------------
+
+        user_data = {
+
+            "uid":
+                uid,
+
+            "name":
+                name or "CampusPulse User",
+
+            "email":
+                email,
+
+            "photo":
+                photo,
+
+            "role":
+                requested_role
+
+        }
+
+
+
+        # ---------------------------------------------
+        # SUCCESS
+        # ---------------------------------------------
+
+        return jsonify({
+
+            "success": True,
+
+            "message":
+                "Authentication successful.",
+
+            "user":
+                user_data
+
+        }), 200
+
+
+
+    except firebase_admin.auth.InvalidIdTokenError:
+
+
+        return jsonify({
+
+            "success": False,
+
+            "message":
+                "Invalid authentication token."
+
+        }), 401
+
+
+
+    except firebase_admin.auth.ExpiredIdTokenError:
+
+
+        return jsonify({
+
+            "success": False,
+
+            "message":
+                "Your login session has expired. Please sign in again."
+
+        }), 401
+
+
+
+    except Exception as error:
+
+
+        print(
+            "LOGIN ERROR:",
+            error
+        )
+
+
+        return jsonify({
+
+            "success": False,
+
+            "message":
+                "Server authentication failed."
+
+        }), 500
+
+
+
+# =====================================================
+# RUN SERVER
+# =====================================================
+
+if __name__ == "__main__":
+
+    app.run(
+        debug=True,
+        host="127.0.0.1",
+        port=5000
+    )
